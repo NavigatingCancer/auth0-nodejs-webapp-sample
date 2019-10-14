@@ -1,0 +1,3 @@
+#!/bin/bash
+
+docker build -t auth0-nodejs-webapp-01-login . > ,builddk 2>&1 &
