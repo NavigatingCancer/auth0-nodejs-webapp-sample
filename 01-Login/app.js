@@ -12,7 +12,7 @@ var authRouter = require('./routes/auth');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
-dotenv.config();
+dotenv.load();
 
 // Configure Passport to use Auth0
 var strategy = new Auth0Strategy(
@@ -21,8 +21,9 @@ var strategy = new Auth0Strategy(
     clientID: process.env.AUTH0_CLIENT_ID,
     clientSecret: process.env.AUTH0_CLIENT_SECRET,
     callbackURL:
-      process.env.AUTH0_CALLBACK_URL || 'http://localhost:3000/callback'
+      process.env.AUTH0_CALLBACK_URL
   },
+      // process.env.AUTH0_CALLBACK_URL || 'http://localhost:3001/callback'
   function (accessToken, refreshToken, extraParams, profile, done) {
     // accessToken is the token to call Auth0 API (not needed in the most cases)
     // extraParams.id_token has the JSON Web Token
