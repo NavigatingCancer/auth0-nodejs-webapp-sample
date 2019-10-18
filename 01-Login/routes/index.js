@@ -6,4 +6,8 @@ router.get('/', function (req, res, next) {
   res.render('index', { title: 'Auth0 Webapp sample Nodejs' });
 });
 
+router.post('/', function (req, res, next) {
+  res.render('index', { title: 'Auth0 Webapp sample Nodejs' });
+});
+
 module.exports = router;

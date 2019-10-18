@@ -12,7 +12,12 @@ var authRouter = require('./routes/auth');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
+// https://medium.com/@tobydigz/logging-in-a-node-express-app-with-morgan-and-bunyan-30d9bf2c07a
+const addRequestId = require('express-request-id')();
+
 dotenv.load();
+
+
 
 // Configure Passport to use Auth0
 var strategy = new Auth0Strategy(
@@ -51,6 +56,26 @@ app.set('view engine', 'pug');
 
 app.use(logger('dev'));
 app.use(cookieParser());
+
+app.use(addRequestId);
+
+var loggerFormat = ':id [:date[web]]" :method :url" :status :responsetime';
+
+// logger.token('id', function getId(req) {
+//     return req.id
+// });
+// app.use(logger(loggerFormat, {
+//     skip: function (req, res) {
+//         return res.statusCode < 400
+//     },
+//     stream: process.stderr
+// }));
+// app.use(logger(loggerFormat, {
+//     skip: function (req, res) {
+//         return res.statusCode >= 400
+//     },
+//     stream: process.stdout
+// }));
 
 // config express-session
 var sess = {
